@@ -1,0 +1,115 @@
+# SwiftLint 项目配置。
+# 所有相对路径均以此文件所在的项目根目录为基准。
+
+# 只扫描以下三个源码目录，避免检查脚本、工程配置和其他非 Swift 文件。
+included:
+  # App 主 Target 的业务源码。
+  - AIChatsXCode26
+  # Unit Test Target 的测试源码。
+  - AIChatsXCode26Tests
+  # UI Test Target 的测试源码。
+  - AIChatsXCode26UITests
+
+# 即使文件位于扫描范围内，匹配以下路径时也跳过。
+excluded:
+  # Swift Package Manager 和常规构建产物。
+  - .build
+  - build
+  # Xcode 派生数据；通常位于项目外，此处作为额外保护。
+  - DerivedData
+  # 常见第三方依赖目录，不检查外部依赖的源码。
+  - Pods
+  - Carthage
+  - SourcePackages
+  # 跳过代码生成器产生的 Swift 文件，避免修改不可人工维护的代码。
+  - "**/*.generated.swift"
+
+# 在 SwiftLint 默认启用规则的基础上，额外启用以下可选规则。
+opt_in_rules:
+  # 用 contains(where:) 代替 filter(where:).count 与 0 的比较，避免创建临时数组。
+  - contains_over_filter_count
+  # 用 contains(where:) 代替 filter(where:).isEmpty，找到匹配项即可停止遍历。
+  - contains_over_filter_is_empty
+  # 用 collection.isEmpty 代替 collection == [] 或 collection == [:]。
+  - empty_collection_literal
+  # 用 string.isEmpty 代替 string == ""。
+  - empty_string
+  # 避免 switch 中的 fallthrough，让每个 case 的控制流更明确。
+  - fallthrough
+  # fatalError 必须提供有意义的消息，便于定位崩溃原因。
+  - fatal_error_message
+  # 用 first(where:) 代替 filter { ... }.first，找到首个结果即可停止。
+  - first_where
+  # 提醒避免使用可选值强制解包 !，降低运行时崩溃风险。
+  - force_unwrapping
+  # 用 last(where:) 代替 filter { ... }.last，表达意图并避免临时集合。
+  - last_where
+  # 对必须调用父类实现的 UIKit 重写方法，检查是否正确调用 super。
+  - overridden_super_call
+  # 用 min()/max() 代替 sorted().first/last，避免不必要的完整排序。
+  - sorted_first_last
+  # 多行函数调用的参数应垂直对齐，提高可读性。
+  - vertical_parameter_alignment_on_call
+  # 名称为 delegate 的引用通常应为 weak，帮助避免委托引用循环。
+  - weak_delegate
+  # 比较表达式把变量放左侧、常量放右侧，例如 count == 0。
+  - yoda_condition
+
+# 如果最终没有找到任何可检查的 Swift 文件，则报错，而不是静默通过。
+allow_zero_lintable_files: false
+# 构建时不访问网络检查 SwiftLint 新版本，保证构建稳定且快速。
+check_for_updates: false
+# 不把所有 warning 自动提升为 error；只有明确配置为 error 的规则才阻止构建。
+strict: false
+# 使用 Xcode 能识别的“文件:行:列:级别”格式输出，问题可直接点击跳转。
+reporter: xcode
+
+# 单行长度：超过 120 字符警告，超过 160 字符报错。
+line_length:
+  warning: 120
+  error: 160
+  # 注释和 URL 往往天然较长，不纳入行长度检查。
+  ignores_comments: true
+  ignores_urls: true
+
+# 单个 Swift 文件长度：超过 500 行警告，超过 800 行报错。
+file_length:
+  warning: 500
+  error: 800
+  # 纯注释行不计入文件长度。
+  ignore_comment_only_lines: true
+
+# 单个类型（class/struct/enum 等）的主体长度限制。
+type_body_length:
+  warning: 300
+  error: 450
+
+# 单个函数或方法的主体长度限制，推动拆分职责过多的方法。
+function_body_length:
+  warning: 60
+  error: 100
+
+# 圈复杂度用于衡量分支数量；分支越多，代码越难理解和测试。
+cyclomatic_complexity:
+  warning: 10
+  error: 20
+
+# 标识符名称至少 2 个字符，减少含义不清的单字母命名。
+identifier_name:
+  min_length:
+    warning: 2
+  # 以下短名称是项目允许的常见惯用名称，不触发标识符长度规则。
+  excluded:
+    - id
+    - x
+    - y
+
+# 强制类型转换 as! 失败会直接崩溃，因此按 error 处理并阻止构建。
+force_cast: error
+# 强制执行 try! 遇到错误会直接崩溃，因此按 error 处理并阻止构建。
+force_try: error
+
+# 禁止行尾多余空格，但允许空白行和注释行保留必要的排版。
+trailing_whitespace:
+  ignores_empty_lines: true
+  ignores_comments: true

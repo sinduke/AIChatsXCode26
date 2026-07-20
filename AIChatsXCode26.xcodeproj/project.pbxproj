@@ -24,12 +24,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F2549252300E517200A80981 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F28B5FA9300E071B00823250 /* AIChatsXCode26.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIChatsXCode26.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F28B5FB6300E071D00823250 /* AIChatsXCode26Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AIChatsXCode26Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F28B5FC0300E071D00823250 /* AIChatsXCode26UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AIChatsXCode26UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		F2549251300E517200A80981 /* Scripts */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Scripts;
+			sourceTree = "<group>";
+		};
 		F28B5FAB300E071B00823250 /* AIChatsXCode26 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = AIChatsXCode26;
@@ -78,6 +84,8 @@
 				F28B5FAB300E071B00823250 /* AIChatsXCode26 */,
 				F28B5FB9300E071D00823250 /* AIChatsXCode26Tests */,
 				F28B5FC3300E071D00823250 /* AIChatsXCode26UITests */,
+				F2549251300E517200A80981 /* Scripts */,
+				F2549252300E517200A80981 /* .swiftlint.yml */,
 				F28B5FAA300E071B00823250 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,6 +110,7 @@
 				F28B5FA5300E071B00823250 /* Sources */,
 				F28B5FA6300E071B00823250 /* Frameworks */,
 				F28B5FA7300E071B00823250 /* Resources */,
+				F2549250300E517200A80981 /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -230,6 +239,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F2549250300E517200A80981 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/swiftlint.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F28B5FA5300E071B00823250 /* Sources */ = {
@@ -397,6 +429,7 @@
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "AI Chats";
@@ -444,6 +477,7 @@
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "AI Chats";
