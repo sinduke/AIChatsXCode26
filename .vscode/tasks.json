@@ -1,0 +1,39 @@
+{
+  // VS Code 任务定义版本。
+  "version": "2.0.0",
+  "tasks": [
+    {
+      // 手动运行：终端 > 运行任务 > SwiftLint：检查整个项目。
+      "label": "SwiftLint：检查整个项目",
+      "type": "shell",
+      // 复用 Xcode Build Phase 使用的脚本，确保两边行为和规则完全一致。
+      "command": "${workspaceFolder}/Scripts/swiftlint.sh",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      // 将 SwiftLint 的 Xcode 格式输出转换为 VS Code“问题”面板诊断。
+      "problemMatcher": {
+        "owner": "swiftlint",
+        "fileLocation": [
+          "absolute"
+        ],
+        "pattern": {
+          "regexp": "^(.+?):(\\d+):(\\d+): (warning|error): (.+?) \\(([^)]+)\\)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5,
+          "code": 6
+        }
+      },
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true,
+        "focus": false
+      }
+    }
+  ]
+}

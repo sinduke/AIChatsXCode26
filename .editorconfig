@@ -1,0 +1,20 @@
+# EditorConfig 是跨编辑器的基础格式约定；VS Code 与其他 IDE 均可读取。
+root = true
+
+# 默认使用 UTF-8、LF、文件末尾换行和 2 空格缩进，保持项目现有风格。
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+max_line_length = 120
+
+# 配置文件采用 2 空格缩进，保持层级紧凑清晰。
+[*.{yml,yaml,json,jsonc}]
+indent_size = 2
+
+# Markdown 中两个行尾空格可能表示显式换行，因此不自动删除。
+[*.md]
+trim_trailing_whitespace = false

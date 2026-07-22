@@ -1,0 +1,29 @@
+{
+  // 打开项目时 VS Code 会提示安装这些扩展；不会强制改变个人全局配置。
+  "recommendations": [
+    // Xcode 工程构建、运行、测试、格式化和模拟器入口。
+    "sweetpad.sweetpad",
+    // Swift 官方语言服务：补全、跳转、重构和 SourceKit-LSP。
+    "swiftlang.swift-vscode",
+    // 保存/编辑时显示与 .swiftlint.yml 一致的实时诊断。
+    "vknabel.vscode-swiftlint",
+    // SweetPad 与 Swift 调试使用的 LLDB 适配器。
+    "vadimcn.vscode-lldb",
+    "llvm-vs-code-extensions.lldb-dap",
+    // 用颜色和竖线显示嵌套缩进层级。
+    "oderwat.indent-rainbow",
+    // 把错误、警告与 SwiftLint 消息直接显示在代码行上。
+    "usernamehw.errorlens",
+    // 强化 TODO、MARK、重要与疑问注释的可见性。
+    "aaron-bond.better-comments",
+    "gruntfuggly.todo-tree",
+    // 检查英文标识符和文档拼写。
+    "streetsidesoftware.code-spell-checker",
+    // 让其他编辑器也遵守项目缩进和换行约定。
+    "editorconfig.editorconfig",
+    // 为 SwiftLint YAML 配置提供语法与结构支持。
+    "redhat.vscode-yaml",
+    // 改善 Xcode/Swift 文件在资源管理器中的图标辨识度。
+    "pkief.material-icon-theme"
+  ]
+}

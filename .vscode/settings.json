@@ -1,0 +1,175 @@
+{
+  // MARK: - SweetPad / Xcode 工程
+  // 使用项目内的 Xcode Workspace，让 SweetPad 能发现 Scheme、Target 和构建设置。
+  "sweetpad.build.xcodeWorkspacePath": "AIChatsXCode26.xcodeproj/project.xcworkspace",
+  // 日常开发与测试统一使用 Debug 配置，保留完整调试信息。
+  "sweetpad.build.configuration": "Debug",
+  "sweetpad.testing.configuration": "Debug",
+  // 使用 xcbeautify 整理 xcodebuild 输出，错误和警告更容易阅读。
+  "sweetpad.build.xcbeautifyEnabled": true,
+  // 为 SourceKit-LSP 生成 Xcode 编译参数，使跳转、补全和诊断理解真实工程。
+  "sweetpad.buildServer.provider": "xcode-build-server",
+  "sweetpad.xcodebuildserver.path": "/opt/homebrew/bin/xcode-build-server",
+  "sweetpad.build.autoGenerateBuildServerConfig": true,
+  "sweetpad.build.autoRestartSwiftLSP": true,
+  // 构建或运行时自动把模拟器带到前台。
+  "sweetpad.build.bringSimulatorToForeground": true,
+  // SweetPad 无法执行某个动作时允许回退到系统 xcodebuild。
+  "sweetpad.system.xcodebuildFallback": true,
+  "sweetpad.system.taskExecutor": "v3",
+  "sweetpad.shellEnv.timeout": 15000,
+  "sweetpad.system.autoRevealTerminal": true,
+  "sweetpad.system.showProgressStatusBar": true,
+  "sweetpad.build.logStreamEnabled": true,
+  // 不向 SweetPad 的错误收集服务发送本项目的运行信息。
+  "sweetpad.system.enableSentry": false,
+
+  // MARK: - Swift 工具链与语言服务
+  // 明确使用当前 Xcode 自带的 Swift 工具链，避免系统中其他 Swift 版本抢占。
+  "swift.path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  // 开启后台索引，改善跨文件跳转、查找引用和自动补全。
+  "swift.sourcekit-lsp.backgroundIndexing": "on",
+  // 正常开发无需记录大量 LSP 通信；排障时再临时改为 messages 或 verbose。
+  "swift.sourcekit-lsp.trace.server": "off",
+  // 调试时使用已安装的 CodeLLDB。
+  "swift.debugger.debugAdapter": "CodeLLDB",
+
+  // MARK: - SwiftLint
+  // VS Code 与 Xcode 共用项目根目录的 .swiftlint.yml，不维护第二套规则。
+  "swiftlint.enable": true,
+  "swiftlint.onlyEnableOnSwiftPMProjects": false,
+  "swiftlint.onlyEnableWithConfig": true,
+  "swiftlint.path": "/opt/homebrew/bin/swiftlint",
+  "swiftlint.toolchainPath": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain",
+  "swiftlint.configSearchPaths": [".swiftlint.yml"],
+  "swiftlint.additionalParameters": ["--force-exclude"],
+  // 打开项目时检查整个工作区；编辑中的 Swift 文件仍会获得实时诊断。
+  "swiftlint.autoLintWorkspace": true,
+
+  // MARK: - Swift 文件编辑行为
+  "[swift]": {
+    // SweetPad 调用 Xcode 工具链中的 swift-format，保存时统一格式。
+    "editor.defaultFormatter": "sweetpad.sweetpad",
+    "editor.formatOnSave": true,
+    // 项目现有 Swift 代码使用 2 空格缩进，与 Xcode swift-format 默认规则保持一致。
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    // 100 字符是提前提醒线，120 字符对应 SwiftLint 的 warning 阈值。
+    "editor.rulers": [100, 120],
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 120,
+    // 保存时只报告 SwiftLint 问题，不自动改写代码，避免产生意外变更。
+    "editor.codeActionsOnSave": {
+      "source.fixAll.swiftlint": "never"
+    }
+  },
+
+  // MARK: - 缩进、括号和代码结构辅助
+  // 这些是 Flutter/Dart 开发中常见的结构识别体验，在 Swift 中同样有效。
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.bracketPairsHorizontal": "active",
+  "editor.guides.highlightActiveBracketPair": true,
+  "editor.guides.indentation": true,
+  "editor.guides.highlightActiveIndentation": true,
+  "editor.matchBrackets": "always",
+  // 滚动长文件时把当前类型/函数标题固定在顶部，方便判断代码所在层级。
+  "editor.stickyScroll.enabled": true,
+  "editor.stickyScroll.maxLineCount": 5,
+  "editor.folding": true,
+  "editor.foldingHighlight": true,
+  "editor.showFoldingControls": "always",
+  // 显示单词之间以外的空白与不可见控制字符，便于发现异常缩进。
+  "editor.renderWhitespace": "boundary",
+  "editor.renderControlCharacters": true,
+  "editor.semanticHighlighting.enabled": true,
+  "editor.inlayHints.enabled": "on",
+  "editor.minimap.enabled": true,
+  "editor.minimap.showSlider": "mouseover",
+
+  // MARK: - Indent Rainbow
+  // 用轻量彩色竖线区分每一级缩进，效果类似 Flutter 常用的嵌套层级提示。
+  "indentRainbow.includedLanguages": ["swift", "dart", "yaml", "jsonc"],
+  "indentRainbow.indicatorStyle": "light",
+  "indentRainbow.lightIndicatorStyleLineWidth": 1,
+  "indentRainbow.colorOnWhiteSpaceOnly": true,
+  "indentRainbow.updateDelay": 100,
+
+  // MARK: - 问题与注释识别
+  // Error Lens 把编译器和 SwiftLint 消息直接显示在对应代码行附近。
+  "errorLens.enabled": true,
+  "errorLens.problemRangeDecorationEnabled": true,
+  "errorLens.gutterIconsEnabled": true,
+  "problems.decorations.enabled": true,
+  // Todo Tree 汇总常见维护标记，MARK 也会出现在侧栏检索结果中。
+  "todo-tree.general.tags": ["TODO", "FIXME", "HACK", "NOTE", "MARK"],
+  "todo-tree.highlights.enabled": true,
+  "todo-tree.highlights.useColourScheme": true,
+  "todo-tree.tree.scanAtStartup": true,
+  // Todo Tree 当前版本未能定位 VS Code 内置 ripgrep，改用本机 Homebrew 可执行文件。
+  "todo-tree.ripgrep.ripgrep": "/opt/homebrew/bin/rg",
+  // Better Comments 为重要、疑问、待办和分区注释提供稳定颜色。
+  "better-comments.tags": [
+    {
+      "tag": "!",
+      "color": "#FF4D4F",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": true,
+      "italic": false
+    },
+    {
+      "tag": "?",
+      "color": "#40A9FF",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": true,
+      "italic": false
+    },
+    {
+      "tag": "TODO",
+      "color": "#FAAD14",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": true,
+      "italic": false
+    },
+    {
+      "tag": "MARK",
+      "color": "#73D13D",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": true,
+      "italic": false
+    }
+  ],
+  // 拼写检查覆盖代码和项目文档，但不把中文内容当作错误。
+  "cSpell.enabledFileTypes": {
+    // 先关闭未明确列出的文件类型，再只开启项目需要检查的类型。
+    "*": false,
+    "swift": true,
+    "markdown": true,
+    "yaml": true
+  },
+  "cSpell.language": "en,en-GB",
+
+  // MARK: - 文件卫生与性能
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  // 不搜索或监听构建产物，减少 CPU 和文件监听开销。
+  "search.exclude": {
+    "**/.build": true,
+    "**/build": true,
+    "**/DerivedData": true
+  },
+  "files.watcherExclude": {
+    "**/.build/**": true,
+    "**/build/**": true,
+    "**/DerivedData/**": true
+  }
+}
